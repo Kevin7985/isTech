@@ -1,7 +1,8 @@
-package com.istech.users.exceptions;
+package com.istech.exceptions;
 
-import com.istech.users.exceptions.exceptions.InternalServerErrorException;
-import com.istech.users.exceptions.models.ApiError;
+import com.istech.exceptions.exceptions.InternalServerErrorException;
+import com.istech.exceptions.models.ApiError;
+import com.istech.users.exceptions.UserNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,17 @@ public class ExceptionsHandler {
     public ApiError internalServerErrorHandler(final InternalServerErrorException e) {
         return new ApiError(
                 HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                e.getMessage()
+        );
+    }
+
+    @ExceptionHandler({
+            UserNotFoundException.class
+    })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError entityNotFoundHandler(final RuntimeException e) {
+        return new ApiError(
+                HttpStatus.NOT_FOUND.toString(),
                 e.getMessage()
         );
     }

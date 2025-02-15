@@ -1,4 +1,4 @@
-package com.istech.users.exceptions.models;
+package com.istech.exceptions.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

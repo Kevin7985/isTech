@@ -1,4 +1,4 @@
-package com.istech.users.exceptions.exceptions;
+package com.istech.exceptions.exceptions;
 
 public class InternalServerErrorException extends RuntimeException {
     public InternalServerErrorException(String message) {

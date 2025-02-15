@@ -1,6 +1,6 @@
 package com.istech.users.dto;
 
-import com.istech.users.exceptions.exceptions.InternalServerErrorException;
+import com.istech.exceptions.exceptions.InternalServerErrorException;
 import com.istech.users.models.User;
 import org.springframework.stereotype.Component;
 
