@@ -1,8 +1,24 @@
 version: '3.1'
 services:
+  auth-db:
+    image: postgres:14-alpine
+    container_name: istech-auth-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=istech_auth
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
   auth-backend-server:
     build: backend/auth/
     image: auth-backend-server
     container_name: istech-auth-backend-server
     ports:
       - "8080:8080"
+    depends_on:
+      - auth-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/istech_auth
+      - SPRING_DATASOURCE_USER=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
