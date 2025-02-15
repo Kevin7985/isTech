@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  auth-backend-server:
+    build: backend/auth/
+    image: auth-backend-server
+    container_name: istech-auth-backend-server
+    ports:
+      - "8080:8080"
