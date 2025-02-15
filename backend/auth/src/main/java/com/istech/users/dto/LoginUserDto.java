@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class NewUserDto {
+public class LoginUserDto {
     @NotNull(message = "Имя пользователя не может быть пустым")
     @Size(min = 1, max = 256, message = "Имя пользователя может быть от 1 до 256 символов")
     private final String username;

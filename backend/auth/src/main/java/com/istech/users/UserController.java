@@ -1,5 +1,7 @@
 package com.istech.users;
 
+import com.istech.users.dto.LoginCredentialsDto;
+import com.istech.users.dto.LoginUserDto;
 import com.istech.users.dto.NewUserDto;
 import com.istech.users.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +26,14 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
+    @Operation(summary = "Получение профиля пользователя по userId")
     public UserDto getUserByUserId(@PathVariable UUID userId) {
         return userService.getUserByUserId(userId);
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "Вход в профиль пользователя")
+    public LoginCredentialsDto loginUser(@RequestBody LoginUserDto userDto) {
+        return userService.loginUser(userDto);
     }
 }

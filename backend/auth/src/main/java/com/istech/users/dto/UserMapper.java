@@ -35,6 +35,32 @@ public class UserMapper {
         );
     }
 
+    public User toUser(LoginUserDto userDto) {
+        String password = userDto.getPassword();
+        byte[] bytesOfMessage = null;
+        byte[] theMD5digest = null;
+        StringBuffer sb = null;
+
+        try {
+            bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            theMD5digest = md.digest(bytesOfMessage);
+
+            sb = new StringBuffer();
+            for (byte b : theMD5digest) {
+                sb.append(Integer.toHexString((b & 0xFF) | 0x100), 1, 3);
+            }
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Encoding error");
+        }
+
+        return new User(
+                null,
+                userDto.getUsername(),
+                sb.toString()
+        );
+    }
+
     public UserDto toUserDto(User user) {
         return new UserDto(
                 user.getId(),

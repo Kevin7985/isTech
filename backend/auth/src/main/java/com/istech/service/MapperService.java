@@ -1,5 +1,6 @@
 package com.istech.service;
 
+import com.istech.users.dto.LoginUserDto;
 import com.istech.users.dto.NewUserDto;
 import com.istech.users.dto.UserDto;
 import com.istech.users.dto.UserMapper;
@@ -13,6 +14,10 @@ public class MapperService {
     private final UserMapper userMapper;
 
     public User toUser(NewUserDto userDto) {
+        return userMapper.toUser(userDto);
+    }
+
+    public User toUser(LoginUserDto userDto) {
         return userMapper.toUser(userDto);
     }
 

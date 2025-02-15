@@ -10,6 +10,12 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  redis:
+    image: 'redis:4-alpine'
+    command: redis-server --requirepass redis_pass
+    ports:
+      - '6379:6379'
+
   auth-backend-server:
     build: backend/auth/
     image: auth-backend-server
@@ -17,8 +23,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      - redis
       - auth-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/istech_auth
       - SPRING_DATASOURCE_USER=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis_pass
